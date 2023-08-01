@@ -4,55 +4,53 @@ from tkinter import messagebox
 import secrets
 import string
 
-def generate_secure_password(length):
-    alphabet = string.ascii_letters + string.digits + string.punctuation
-    password = ''.join(secrets.choice(alphabet) for _ in range(length))
-    return password
+# Función para generar una contraseña segura
+def generar_contraseña_segura(longitud):
+    alfabeto = string.ascii_letters + string.digits + string.punctuation
+    contraseña = ''.join(secrets.choice(alfabeto) for _ in range(longitud))
+    return contraseña
 
-def generate_password():
-    length = int(length_var.get())
-    password = generate_secure_password(length)
-    messagebox.showinfo("Contraseña generada", f"Contraseña generada: {password}")
+# Función para generar la contraseña y mostrarla en un cuadro de diálogo
+def generar_contraseña():
+    longitud = int(var_longitud.get())
+    contraseña = generar_contraseña_segura(longitud)
+    messagebox.showinfo("Contraseña generada", f"Contraseña generada: {contraseña}")
 
 # Crear la ventana principal
-window = tk.Tk()
-window.title("PASSWORD GENERATOR")
-window.geometry("300x250")
-window.configure(bg="#000000")
+ventana = tk.Tk()
+ventana.title("GENERADOR DE CONTRASEÑAS")
+ventana.geometry("300x250")
+ventana.configure(bg="#000000")
 
 # Estilo personalizado para los widgets
-style = ttk.Style(window)
-style.configure("TLabel", background="#000000", foreground="#FFDC00", font=("PixelOperator8", 16))
-style.configure("TButton",
-                background="#1E1E1E",
-                foreground="#000000",
-                font=("PixelOperator8", 14),
-                padding=5,
-                relief="flat")
+estilo = ttk.Style(ventana)
+estilo.configure("TLabel", background="#000000", foreground="#FFDC00", font=("PixelOperator8", 16))
+estilo.configure("TButton", background="#1E1E1E", foreground="#000000", font=("PixelOperator8", 14), padding=5, relief="flat")
 
 # Encabezado
-header_label = tk.Label(window, text="PASSWORD\nGENERATOR", font=("PixelOperator8", 16), bg="#000000", fg="#FFDC00")
-header_label.pack(pady=10)
+etiqueta_encabezado = tk.Label(ventana, text="GENERADOR\nDE CONTRASEÑAS", font=("PixelOperator8", 16), bg="#000000", fg="#FFDC00")
+etiqueta_encabezado.pack(pady=10)
 
-# Etiqueta y opción para seleccionar la longitud
-length_label = ttk.Label(window, text="Seleccionar longitud:")
-length_label.pack(pady=5)
+# Etiqueta y opción para seleccionar la longitud de la contraseña
+etiqueta_longitud = ttk.Label(ventana, text="Seleccionar longitud:")
+etiqueta_longitud.pack(pady=5)
 
-length_var = tk.StringVar(window)
-length_var.set("6")  # Valor predeterminado
+var_longitud = tk.StringVar(ventana)
+var_longitud.set("6")  # Valor predeterminado
 
-length_options = ["6", "8", "10", "12", "16"]
-length_menu = ttk.OptionMenu(window, length_var, *length_options)
-length_menu.pack()
+opciones_longitud = ["6", "8", "10", "12", "16"]
+menu_longitud = ttk.OptionMenu(ventana, var_longitud, *opciones_longitud)
+menu_longitud.pack()
 
 # Botón para generar la contraseña
-generate_button = ttk.Button(window, text="Generar Clave segura", command=generate_password)
-generate_button.pack(pady=20)
-generate_button.configure(style="TButton")
+boton_generar = ttk.Button(ventana, text="Generar Contraseña segura", command=generar_contraseña)
+boton_generar.pack(pady=20)
+boton_generar.configure(style="TButton")
 
 # Etiqueta de crédito
-credit_label = ttk.Label(window, text="Desarrollado por dfarpy", font=("PixelOperator8", 8))
-credit_label.pack(side=tk.BOTTOM, pady=5)
+etiqueta_credito = ttk.Label(ventana, text="Desarrollado por dfarpy", font=("PixelOperator8", 8))
+etiqueta_credito.pack(side=tk.BOTTOM, pady=5)
 
 # Ejecutar la ventana
-window.mainloop()
+ventana.mainloop()
+
